@@ -31,6 +31,7 @@ typedef enum{
     SPI1,
     SPI2,
     SPI3,
+    SPI4,
 }SPI_ENUM;
 
 

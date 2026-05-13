@@ -202,16 +202,18 @@ RCC_ERRORS_RETURN MCAL_void_PLL_CLK_mode(PLL_MODES speed_mode){
 
 
 void MCAL_void_RCC_CLK_ENB_AHB1(){
-    RCC_STRUCT->RCC_AHB1ENR=0x0060109F;
+    RCC_STRUCT->RCC_AHB1ENR=(u32)0x0060109F;
 }
 
 void MCAL_void_RCC_CLK_ENB_AHB2(){
     set_bit(RCC_STRUCT->RCC_AHB2ENR,7);
 }
 void MCAL_void_RCC_CLK_ENB_APB1(){
+    RCC_STRUCT->RCC_APB1ENR=(u32)0b10000111000101100100000001111;
 
 }
 void MCAL_void_RCC_CLK_ENB_APB2(){
+    RCC_STRUCT->RCC_APB2ENR=(u32)0b1110111100100110001;
     
 }
 
@@ -223,15 +225,54 @@ void MCAL_void_RCC_CLK_ENB_GPIO_all(){
 }
 
 void MCAL_void_RCC_CLK_ENB_USART_all(){
-
+    set_bit(RCC_STRUCT->RCC_APB2ENR,4);
+    set_bit(RCC_STRUCT->RCC_APB1ENR,17);
+    set_bit(RCC_STRUCT->RCC_APB2ENR,5);
+    
 }
 void MCAL_void_RCC_CLK_ENB_I2C_all(){
-
+    set_bit(RCC_STRUCT->RCC_APB1ENR,21);
+    set_bit(RCC_STRUCT->RCC_APB1ENR,22);
+    set_bit(RCC_STRUCT->RCC_APB1ENR,23);
 }
 
+
+void MCAL_void_RCC_CLK_ENB_SPI_all(){
+    set_bit(RCC_STRUCT->RCC_APB2ENR,12);
+    set_bit(RCC_STRUCT->RCC_APB1ENR,14);
+    set_bit(RCC_STRUCT->RCC_APB1ENR,15);
+    set_bit(RCC_STRUCT->RCC_APB2ENR,13);
+}
 void MCAL_void_RCC_CLK_ENB_DMA(){
     set_bit(RCC_STRUCT->RCC_AHB1ENR,21);
     set_bit(RCC_STRUCT->RCC_AHB1ENR,22);
+}
+
+void MCAL_void_RCC_CLK_ENB_GPIO(GPIO_ENUM GPIO_SELECT){
+    switch (GPIO_SELECT)
+    {
+    case GPIOA:
+        set_bit(RCC_STRUCT->RCC_AHB1ENR,0);
+        break;
+    case GPIOB:
+        set_bit(RCC_STRUCT->RCC_AHB1ENR,1);
+        break;
+    case GPIOC:
+        set_bit(RCC_STRUCT->RCC_AHB1ENR,2);
+        break;
+    case GPIOD:
+        set_bit(RCC_STRUCT->RCC_AHB1ENR,3);
+        break;
+    case GPIOE:
+        set_bit(RCC_STRUCT->RCC_AHB1ENR,4);
+        break;
+    case GPIOH:
+        set_bit(RCC_STRUCT->RCC_AHB1ENR,7);
+        break;                
+        
+    default:
+        break;
+    }
 }
 
 void MCAL_void_RCC_CLK_ENB_TIM(TIMER_ENUM TIM_SELECT){
@@ -268,14 +309,57 @@ void MCAL_void_RCC_CLK_ENB_TIM(TIMER_ENUM TIM_SELECT){
 }
 
 void MCAL_void_RCC_CLK_ENB_USART(USART_ENUM USART_SELECT){
-    // write your own code
+    switch (USART_SELECT)
+    {
+    case USART1:
+        set_bit(RCC_STRUCT->RCC_APB2ENR,4);
+        break;
+    case USART2:
+        set_bit(RCC_STRUCT->RCC_APB1ENR,17);
+        break;
+    case USART6:
+        set_bit(RCC_STRUCT->RCC_APB2ENR,5);
+        break;
+    default:
+        break;
+    }
 }
 
 void MCAL_void_RCC_CLK_ENB_I2C(I2C_ENUM I2C_SELECT){
-    // do the same
+    switch (I2C_SELECT)
+    {
+    case I2C1:
+        set_bit(RCC_STRUCT->RCC_APB1ENR,21);
+        break;
+    case I2C2:
+        set_bit(RCC_STRUCT->RCC_APB1ENR,22);
+        break;
+    case I2C3:
+        set_bit(RCC_STRUCT->RCC_APB1ENR,23);
+        break;    
+    default:
+        break;
+    }
 }
 
 void MCAL_void_RCC_CLK_ENB_SPI(SPI_ENUM SPI_SELECT){
+    switch (SPI_SELECT)
+    {
+    case SPI1:
+        set_bit(RCC_STRUCT->RCC_APB2ENR,12);
+        break;
+    case SPI2:
+        set_bit(RCC_STRUCT->RCC_APB1ENR,14);
+        break;
+    case SPI3:
+        set_bit(RCC_STRUCT->RCC_APB1ENR,15);
+        break;
+    case SPI4:
+        set_bit(RCC_STRUCT->RCC_APB2ENR,13);
+        break;
+    default:
+        break;
+    }
 
 }
 
