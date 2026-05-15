@@ -36,6 +36,7 @@ typedef enum{
 
 
 typedef enum{
+    NOOPTION_GPIO = -1,
     GPIOA,
     GPIOB,
     GPIOC,
@@ -45,17 +46,18 @@ typedef enum{
 }GPIO_ENUM;
 
 typedef enum{
-    SYS,
-    TIM_12,
-    TIM_345,
-    TIM_9_10_11,
-    I2C_123,
-    SPI_1234,
-    SPI_23,
-    USART_12,
-    USART_6,
-    I2C_23,
-    OTG1_FS
+    NOOPTION_AF = -1,
+    AF0,
+    AF1,
+    AF2,
+    AF3,
+    AF4,
+    AF5,
+    AF6,
+    AF7,
+    AF8, 
+    
 }AF_ENUM;
+
 
 #endif
