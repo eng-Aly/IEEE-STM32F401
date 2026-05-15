@@ -20,4 +20,12 @@ typedef struct RCC_regs_struct
 }GPIO_TYPEDEF;
 
 
+#define GPIOA_STRUCT                 ((GPIO_TYPEDEF*)(GPIOA_BASE_ADDR))
+#define GPIOB_STRUCT                 ((GPIO_TYPEDEF*)(GPIOB_BASE_ADDR))
+#define GPIOC_STRUCT                 ((GPIO_TYPEDEF*)(GPIOC_BASE_ADDR))
+#define GPIOD_STRUCT                 ((GPIO_TYPEDEF*)(GPIOD_BASE_ADDR))
+#define GPIOE_STRUCT                 ((GPIO_TYPEDEF*)(GPIOE_BASE_ADDR))
+#define GPIOH_STRUCT                 ((GPIO_TYPEDEF*)(GPIOH_BASE_ADDR))
+
+
 #endif

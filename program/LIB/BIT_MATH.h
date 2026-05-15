@@ -10,7 +10,7 @@
 #define clear_byte(reg)         reg=0x00
 
 
-
+#define write_bit_double(reg,number,mode)  (reg=((reg&(~(0b11<<(number*2))))|(mode<<(number*2))))
 
 
 #endif

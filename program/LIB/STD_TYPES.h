@@ -21,6 +21,7 @@ struct bits_access{
 
 };
 
+#define NULL ((void *)0)
 
 
 #endif

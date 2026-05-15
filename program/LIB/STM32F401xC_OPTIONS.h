@@ -44,4 +44,18 @@ typedef enum{
     GPIOH
 }GPIO_ENUM;
 
+typedef enum{
+    SYS,
+    TIM_12,
+    TIM_345,
+    TIM_9_10_11,
+    I2C_123,
+    SPI_1234,
+    SPI_23,
+    USART_12,
+    USART_6,
+    I2C_23,
+    OTG1_FS
+}AF_ENUM;
+
 #endif
