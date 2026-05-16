@@ -1,17 +1,29 @@
-#ifndef EXTI_PRV_H
-#define EXTI_PRV_H
+#ifndef EXTI_PRV_H_
+#define EXTI_PRV_H_
 
-#include "../../lib/STD_TYPES.h"
-#include "../../LIB/STM32F401xC_HEADER.h"
+/* =========================================================
+ *                      Includes
+ * =========================================================*/
+
+ #include "../../lib/STD_TYPES.h"
+ #include "../../lib/STM32F401xC_HEADER.h"
+
+
+/* =========================================================
+ *                  EXTI Registers
+ * =========================================================*/
 
 typedef struct
 {
-   volatile u32 
-    
-}EXTI_TYPEDEF;
+    u32 IMR;
+    u32 EMR;
+    u32 RTSR;
+    u32 FTSR;
+    u32 SWIER;
+    u32 PR;
+}EXTI_t;
 
-
-#define EXTI_STRUCT     ((EXTI_TYPEDEF*)(EXTI_BASE_ADDR))
+#define EXTI     ((volatile EXTI_t*)(EXTI_BASE_ADDR))
 
 
 #endif
