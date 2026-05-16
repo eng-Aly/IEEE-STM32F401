@@ -6,7 +6,8 @@
  * =========================================================*/
 
  #include "../../lib/STD_TYPES.h"
- #include "../GPIO/GPIO_prv.h"
+ #include "../GPIO/GPIO.h"
+ #include "../SYSCFG/SYSCFG_int.h"
  #include "../../lib/STM32F401xC_OPTIONS.h"
 
  /* =========================================================
@@ -39,6 +40,7 @@ typedef struct
  void EXTI_voidInit(EXTI_config_t* config);
  void EXTI_voidUpdate(EXTI_config_t* config);
  void EXTI_voidDeInit(void);
+ void EXTI_update_trigger(EXTI_config_t* config);
 
 
  #endif /* EXTI_INT_H_ */

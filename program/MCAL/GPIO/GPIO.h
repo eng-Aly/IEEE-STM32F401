@@ -14,6 +14,9 @@ typedef struct
     GPIO_ENUM port;
     u8 pin;
     u8 mode;
+    u8 output_type;
+    u8 output_speed;
+    u8 pull_updown;
 }GPIO_CONFIG;
 
 
@@ -26,7 +29,7 @@ u8 digitalRead(u8 pin);
 
 
 
-void GPIO_init(GPIO_CONFIG CONFIG);
+void GPIO_init(GPIO_CONFIG* CONFIG);
 
 void GPIO_void_SELECT_MODE(GPIO_ENUM GPIO_OPTION,u8 pin,u8 mode);
 

@@ -16,12 +16,12 @@
  * =========================================================*/
 
  // reset values
-#define EXTI_RESET_VALUE_IMR                      0x00000000
-#define EXTI_RESET_VALUE_EMR                      0x00000000
-#define EXTI_RESET_VALUE_RTSR                     0x00000000
-#define EXTI_RESET_VALUE_FTSR                     0x00000000
-#define EXTI_RESET_VALUE_SWIER                    0x00000000
-#define EXTI_RESET_VALUE_PR                       0xFFFFFFFF 
+#define EXTI_RESET_VALUE_IMR                    0x00000000
+#define EXTI_RESET_VALUE_EMR                    0x00000000
+#define EXTI_RESET_VALUE_RTSR                   0x00000000
+#define EXTI_RESET_VALUE_FTSR                   0x00000000
+#define EXTI_RESET_VALUE_SWIER                  0x00000000
+#define EXTI_RESET_VALUE_PR                     0xFFFFFFFF 
 
 // @ref Trigger Types
 #define EXTI_TRIGGER_RISING	                    0
@@ -29,14 +29,18 @@
 #define EXTI_TRIGGER_CHANGE	                    2
 
     // defalt state is rising edge
-#define Trigger                                 EXTI_TRIGGER_RISING
+#define TRIGGER_DEFAULT                         EXTI_TRIGGER_RISING
 
 // @ref Enable/Disable
 #define EXTI_DISABLE			                0
 #define EXTI_ENABLE			                    1
 
     // defalt state is enabled
-#define Enable                                  EXTI_ENABLE
+#define ENABLE_DEFAULT                          EXTI_ENABLE
+
+    // default pull up pull down state is no pull
+#define PULLUPDOWN_DEFAULT                      NO_PULL
+
 
 // @ref EXTI_Lines
  #define EXTI0					                0

@@ -313,16 +313,18 @@ void GPIO_void_set_AF(GPIO_ENUM GPIO_OPTION,u8 pin, AF_ENUM AF_OPTION){
 
 
 void GPIO_void_enable_AF(GPIO_ENUM GPIO_OPTION,u8 pin, AF_ENUM AF_OPTION){
-    GPIO_void_SELECT_MODE(GPIO_OPTION, pin,AF);
+    GPIO_void_SELECT_MODE(GPIO_OPTION, pin, AF);
     GPIO_void_set_AF(GPIO_OPTION, pin,AF_OPTION); 
 }
 
 
-void GPIO_init(GPIO_CONFIG CONFIG){
-    GPIO_void_SELECT_MODE(CONFIG.port,CONFIG.pin,CONFIG.mode);
-    GPIO_void_SELECT_OP_MODE(CONFIG.port,CONFIG.pin,OP_MODE);
-    GPIO_void_SELECT_SPEED_MODE(CONFIG.port,CONFIG.pin,SPEED_MODE);
-    GPIO_void_SELECT_PULL_MODE(CONFIG.port,CONFIG.pin,PULL_TYPE);
+void GPIO_init(GPIO_CONFIG* CONFIG){
+    GPIO_void_SELECT_MODE(CONFIG->port,CONFIG->pin,CONFIG->mode);
+    GPIO_void_SELECT_PULL_MODE(CONFIG->port,CONFIG->pin,CONFIG->pull_updown);
+    if (CONFIG->mode == OUTPUT){
+        GPIO_void_SELECT_OP_MODE(CONFIG->port,CONFIG->pin,CONFIG->output_type);
+        GPIO_void_SELECT_SPEED_MODE(CONFIG->port,CONFIG->pin,CONFIG->output_speed);
+    }
 }
 
 void pinMode(u8 pin,u8 mode){
@@ -330,9 +332,25 @@ void pinMode(u8 pin,u8 mode){
     //PB7 -> 1*16 + 7 = 23
     u8 pin_num = pin % 16;
     u8 port = pin /16;
-    GPIO_CONFIG GPIO_CFG={(GPIO_ENUM)(port),pin_num,mode};
-    GPIO_init(GPIO_CFG);
+    GPIO_CONFIG GPIO_CFG={(GPIO_ENUM)(port),pin_num,mode,OP_MODE,SPEED_MODE,PULL_TYPE};
+
+    GPIO_void_SELECT_MODE(GPIO_CFG.port,GPIO_CFG.pin,GPIO_CFG.mode);
+    switch (GPIO_CFG.mode)
+    {
+    case INPUT:
+        GPIO_void_SELECT_PULL_MODE(GPIO_CFG.port,GPIO_CFG.pin,PULL_TYPE);
+        break;
+    case OUTPUT:
+        GPIO_void_SELECT_PULL_MODE(GPIO_CFG.port,GPIO_CFG.pin,PULL_TYPE);
+        GPIO_void_SELECT_OP_MODE(GPIO_CFG.port,GPIO_CFG.pin,OP_MODE);
+        GPIO_void_SELECT_SPEED_MODE(GPIO_CFG.port,GPIO_CFG.pin,SPEED_MODE);
+        break;
+    case ANALOG:
+        GPIO_void_SELECT_PULL_MODE(GPIO_CFG.port,GPIO_CFG.pin,NO_PULL);
+        break;
+    }
 }
+
 void digitalWrite(u8 pin , u8 output){
     u8 pin_num = pin % 16;
     u8 port = pin /16;
