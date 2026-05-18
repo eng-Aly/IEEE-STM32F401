@@ -24,6 +24,7 @@ typedef struct
 void pinMode(u8 pin,u8 mode);
 void digitalWrite(u8 pin , u8 output);
 u8 digitalRead(u8 pin);
+void toggle(u8 pin);
 
 
 

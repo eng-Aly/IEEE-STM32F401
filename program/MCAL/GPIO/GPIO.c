@@ -4,7 +4,7 @@
 
 
 
-void GPIO_SELECT_MODE(GPIO_ENUM GPIO_OPTION,u8 pin,u8 mode){
+void GPIO_void_SELECT_MODE(GPIO_ENUM GPIO_OPTION,u8 pin,u8 mode){
     //change to null
     // volatile u32* MODE_REG = &(GPIOA_STRUCT->MODER);
     volatile u32* MODE_REG = NULL;
@@ -34,16 +34,16 @@ void GPIO_SELECT_MODE(GPIO_ENUM GPIO_OPTION,u8 pin,u8 mode){
     switch (mode)
     {
     case OUTPUT:
-        (*MODE_REG) &= ~(0b11<<2*pin);
-        (*MODE_REG) |= (OUTPUT<<2*pin);       
+        (*MODE_REG) &= ~(0b11 << (2*pin));
+        (*MODE_REG) |= (OUTPUT << (2*pin));       
         break;
     case INPUT:
-        (*MODE_REG) &= ~(0b11<<2*pin);
-        (*MODE_REG) |= (INPUT<<2*pin);
+        (*MODE_REG) &= ~(0b11 << (2*pin));
+        (*MODE_REG) |= (INPUT << (2*pin));
         break;
     case AF:
-        (*MODE_REG) &= ~(0b11<<2*pin);
-        (*MODE_REG) |= (AF<<2*pin);
+        (*MODE_REG) &= ~(0b11 << (2*pin));
+        (*MODE_REG) |= (AF << (2*pin));
         break;
     case ANALOG:
         // (*MODE_REG) &= ~(0b11<<pin);   //1110011111
@@ -364,3 +364,19 @@ u8 digitalRead(u8 pin){
     return GPIO_void_digital_Read((GPIO_ENUM)port,pin_num);
 }
 
+void toggle(u8 pin){
+    u8 pin_num = pin % 16;
+    u8 port = pin /16;
+    switch (port)
+    {
+    case GPIOA:
+        toggle_bit(GPIOA_STRUCT->ODR, pin_num);
+        break;
+    case GPIOB:
+        toggle_bit(GPIOB_STRUCT->ODR, pin_num);
+        break;
+    case GPIOC:
+        toggle_bit(GPIOC_STRUCT->ODR, pin_num);
+        break;
+    }
+}

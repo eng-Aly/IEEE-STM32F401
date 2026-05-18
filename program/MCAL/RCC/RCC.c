@@ -1,18 +1,28 @@
 #include "RCC.h"
 
 
-
-
-
 void MCAL_void_RCC_CLK_HSE_ENB();
 void MCAL_void_RCC_CLK_HSI_ENB();
 void MCAL_void_RCC_CLK_PLL_ENB();
 
+// only decleration without definition
 void MCAL_void_PLL_CLK_CONF(RCC_CLOCK_SRC pll_option);
 
 
 RCC_ERRORS_RETURN MCAL_void_PLL_CLK_CONF_mul(u32 P , u8 M ,u32 N);
 
+void MCAL_void_PLL_CLK_CONF(RCC_CLOCK_SRC pll_option){
+    switch (pll_option)
+    {
+    case HSI:
+        clear_bit(RCC_STRUCT->RCC_PLLCFGR, HSI_HSE_PLL);
+        break;
+    
+    case HSE:
+        set_bit(RCC_STRUCT->RCC_PLLCFGR, HSI_HSE_PLL);
+        break;
+    }
+}
 
 void MCAL_void_RCC_CLK_SRC(RCC_CLOCK_SRC clock_src){
     switch (clock_src)
@@ -146,25 +156,30 @@ RCC_ERRORS_RETURN MCAL_void_PLL_CLK_mode(PLL_MODES speed_mode){
     // 84 max , low speed 24 mhz 
     case LOW_SPEED:
         return MCAL_void_PLL_CLK_CONF_mul(8,25,192);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   24000000U
         break;
     //medium speed 48 mhz    
     case MEDIUM_SPEED:
         return MCAL_void_PLL_CLK_CONF_mul(4,25,192);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   48000000U
         break;
     //high speed 64 mhz    
     case HIGH_SPEED:
         return MCAL_void_PLL_CLK_CONF_mul(4,25,256);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   64000000U
         break;
     // max speed 84 mhz    
     case MAX_SPEED:
         return MCAL_void_PLL_CLK_CONF_mul(4,25,336);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   84000000U    
         break;       
     default:
         return MCAL_void_PLL_CLK_CONF_mul(4,25,336);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   84000000U
         break;
     }
@@ -174,25 +189,30 @@ RCC_ERRORS_RETURN MCAL_void_PLL_CLK_mode(PLL_MODES speed_mode){
     // 84 max , low speed 24 mhz 
     case LOW_SPEED:
         return MCAL_void_PLL_CLK_CONF_mul(8,8,192);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   24000000U
         break;
     //medium speed 48 mhz    
     case MEDIUM_SPEED:
         return MCAL_void_PLL_CLK_CONF_mul(4,8,192);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   48000000U
         break;
     //high speed 64 mhz    
     case HIGH_SPEED:
         return MCAL_void_PLL_CLK_CONF_mul(4,8,256);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   64000000U
         break;
     // max speed 84 mhz    
     case MAX_SPEED:
         return MCAL_void_PLL_CLK_CONF_mul(4,8,336);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   84000000U    
         break;       
     default:
         return MCAL_void_PLL_CLK_CONF_mul(4,8,336);
+        #undef  SYSTEM_CLK
         #define SYSTEM_CLK   84000000U
         break;
     }
@@ -453,11 +473,10 @@ void MCAL_VOID_RCC_AHB_PRESCALE(u8 prescaler){
 
 
 void MCAL_VOID_RCC_init_default(){
-    MCAL_void_RCC_CLK_SRC(PLL);
+    MCAL_void_RCC_CLK_SRC(HSI);
     MCAL_VOID_RCC_APB1_PRESCALE(2);
     MCAL_void_RCC_CLK_ENB_GPIO_all();
     MCAL_void_RCC_CLK_ENB_USART_all();  //continue
     MCAL_void_RCC_CLK_ENB_I2C_all();  //continue 
 }
-
 

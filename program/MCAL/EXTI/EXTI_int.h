@@ -7,6 +7,7 @@
 
  #include "../../lib/STD_TYPES.h"
  #include "../GPIO/GPIO.h"
+  #include "EXTI_cfg.h"
  #include "../SYSCFG/SYSCFG_int.h"
  #include "../../lib/STM32F401xC_OPTIONS.h"
 
@@ -17,7 +18,7 @@
 typedef struct
 {
     u16             EXTI_Line;                      // EXTI Line Number (0-15) refere to @ref EXTI_Lines or EXTI_ENUM
-    GPIO_TYPEDEF    *GPIO_Port;                     // GPIO Port (GPIOA, GPIOB, etc.)
+    GPIO_ENUM       GPIO_Port;                      // GPIO Port (GPIOA, GPIOB, etc.)
     u16             GPIO_Pin;                       // GPIO Pin Number (0-15)
     u16             IVT_position;                   // IVT Position for EXTI Line ( 6-10 for EXTI0-4, 23 for EXTI5-9, 40 for EXTI10-15)        
 
@@ -40,7 +41,6 @@ typedef struct
  void EXTI_voidInit(EXTI_config_t* config);
  void EXTI_voidUpdate(EXTI_config_t* config);
  void EXTI_voidDeInit(void);
- void EXTI_update_trigger(EXTI_config_t* config);
 
 
  #endif /* EXTI_INT_H_ */

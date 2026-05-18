@@ -29,6 +29,6 @@
 #define SYSCFG_BASE_ADDR    (volatile u32*)(0x40013800U)
 
 /* ================ NVIC Base Addresses ================ */
-#define NVIC_BASE_ADDR      (volatile u32*)(0xE000E000U)
+#define NVIC_BASE_ADDR      (volatile u32*)(0xE000E100U)
 
 #endif

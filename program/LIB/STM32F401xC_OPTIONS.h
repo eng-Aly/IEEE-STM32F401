@@ -59,24 +59,24 @@ typedef enum{
     
 }AF_ENUM;
 
-typedef enum{
-    NOOPTION_EXTI = -1,
-    EXTI0,
-    EXTI1,
-    EXTI2,
-    EXTI3,
-    EXTI4,
-    EXTI5,
-    EXTI6,
-    EXTI7,
-    EXTI8,
-    EXTI9,
-    EXTI10,
-    EXTI11,
-    EXTI12,
-    EXTI13,
-    EXTI14,
-    EXTI15
-}EXTI_ENUM;
+// typedef enum{
+//     NOOPTION_EXTI = -1,
+//     EXTI0,
+//     EXTI1,
+//     EXTI2,
+//     EXTI3,
+//     EXTI4,
+//     EXTI5,
+//     EXTI6,
+//     EXTI7,
+//     EXTI8,
+//     EXTI9,
+//     EXTI10,
+//     EXTI11,
+//     EXTI12,
+//     EXTI13,
+//     EXTI14,
+//     EXTI15
+// }EXTI_ENUM;
 
 #endif

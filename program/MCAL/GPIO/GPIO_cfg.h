@@ -20,7 +20,7 @@
 #define PULLDOWN                        0b10
 #define PUPD_RESERVED                   0b11
 
-#define PULL_TYPE                       PULLDOWN
+#define PULL_TYPE                       NO_PULL
 
 /* PIN Numbers */
 #define PIN0                            0

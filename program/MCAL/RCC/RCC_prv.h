@@ -46,10 +46,10 @@ typedef struct RCC_regs_struct
 }RCC_TYPEDEF;
 
 
-#define RCC_STRUCT     ((RCC_TYPEDEF*)(RCC_BASE_ADDR))
+#define RCC_STRUCT      ((RCC_TYPEDEF*)(RCC_BASE_ADDR))
 
 
-
+#define HSI_HSE_PLL         22
 
 
 

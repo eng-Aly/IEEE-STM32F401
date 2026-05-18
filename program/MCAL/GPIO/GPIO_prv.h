@@ -5,7 +5,7 @@
 #include "../../LIB/STM32F401xC_HEADER.h"
 
 
-typedef struct RCC_regs_struct
+typedef struct
 {
     u32 MODER;
     u32 OTYPER;
